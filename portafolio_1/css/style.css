@@ -1,0 +1,851 @@
+/******************Import*******************/
+
+
+/***********Custom Properties***********/
+:root{
+--first-color: rgba(217, 0, 98, 0.75);
+--first-color-opacity: rgba(217, 0, 98, 0.705);
+--second-color: rgba(20, 25, 45);
+--second-color-opacity: rgba(20, 25, 45, 1);
+--third-color: rgba(80, 20, 100, 0.75);
+--third-color-opacity: rgba(80, 20, 100, 1);
+--black:rgb(17, 17, 17);
+--black-opacity: rgba(17, 17, 17, 0.4);
+--white-opacity: rgba(255, 255, 255, 0.52);
+--font: sans-serif;
+--link-color:rgb(255, 255, 255);
+--title-color:#333333;
+--text-color: #2f2f2f;
+--max-width: 1200px;
+--header-height: 4rem;
+--gray: #e0dddd;
+}
+
+/*************Reset************/
+html{
+    box-sizing: border-box;
+    font-family: var(--font);
+    font-size: 16px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+    
+    *,
+    *::after
+    *::before{
+        box-sizing: inherit;
+    }
+
+    body{
+        margin:0;
+        overflow-x: hidden;
+        color: var(--text-color);
+    }
+
+
+    h1, h2, h3, h4, h5, h6{
+        margin:0;
+    }
+
+    a{
+        color: var(--link-color);
+        transition: all 0.5s ease-out;
+    }
+
+    a:hover{
+        opacity: 0.75;
+    }
+
+    h1{
+        font-size: 2rem;
+    }
+
+    h2{
+        font-size: 1.5rem;
+    }
+
+    h3{
+        font-size: 1.25rem;
+    }
+
+    h4{
+        font-size: 1rem;
+    }
+
+    h5{
+        font-size: 0.85rem;
+    }
+
+    h6{
+        font-size: 0.7rem;
+    }
+
+    img{
+        max-width: 100%;
+        height: auto;
+    }
+
+    p{
+        line-height: 1.6rem;
+    }
+    
+/**********Components**********/
+
+/************Carousel**********/
+
+/* @keyframes carousel-slide{
+    0%{
+        transform: translateX(0%);
+    }
+    25%{
+        transform: translateX(-25%);
+    }
+    50%{
+        transform: translateX(-50%);
+    }
+    75%{
+        transform: translateX(-75%);
+    }
+} */
+
+.carousel{
+    margin: 2rem auto;
+    padding: 2rem 0;
+    max-width: 800px;
+    text-align: center;
+    overflow-x: hidden;
+    background-color: var(--carousel-bg-color);
+}
+
+.carousel > .slides{
+    /*por cada slide se añade un 100% al ancho*/
+    padding-left: 0;
+    width: 400%;
+    display: flex;
+    list-style: none;
+    transition: transform 0.5s ease-in-out;
+    /* animation: carousel-slide 12s ease-in-out 3s; */
+}
+
+.carousel > input{
+    display: none;
+}
+
+/*los controles de desplazamiento*/
+.slides-nav > label{
+    border: medium solid var(--text-color);
+    border-radius: 50%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
+}
+
+/*se mueve en x hacia la izquierda por eso son valores negativos*/
+#slide-1:checked ~ .slides {
+    transform: translateX(0%);
+}
+
+#slide-2:checked ~ .slides {
+    transform: translateX(-25%);
+}
+
+#slide-3:checked ~ .slides {
+    transform: translateX(-50%);
+}
+
+#slide-4:checked ~ .slides {
+    transform: translateX(-75%);
+}
+
+#slide-1:checked ~ .slides-nav > label#dot-1,
+#slide-2:checked ~ .slides-nav > label#dot-2,
+#slide-3:checked ~ .slides-nav > label#dot-3,
+#slide-4:checked ~ .slides-nav > label#dot-4{
+    background-color: #2f2f2f;
+}
+
+.slide > blockquote {
+    margin:0 auto;
+    padding: 0 16rem;
+}
+
+/*********Contact Form***********/
+
+.contact-form{
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    overflow-x: hidden;
+}
+
+.contact-form >*{
+    padding: 0.5rem;
+    margin: 1rem auto;
+    display: block;
+    width: 80%;
+}
+
+.contact-form > input,
+.contact-form > textarea{
+    font-size: .85rem;
+    font-family: var(--font);
+}
+
+.contact-form > input{
+    border: 0;
+    border-bottom: thin solid var(--text-color);
+    padding-left: 0;
+}
+
+.contact-form > textarea{
+    border: thin solid var(--text-color);
+    resize: none;
+}
+
+.contact-form > input[type="submit"]{
+    margin-top: 0;
+    margin-left: 3.3rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+
+.contact-form > input[type="submit"]:hover{
+    opacity: 75%;
+}
+
+.contact-form *::placeholder{
+        color: var(--text-color);
+}
+
+.contact-form-response{
+    padding: 1rem;
+    width: 250px;
+    text-align: center;
+    background-color: white;
+}
+
+.contact-form-response > svg{
+    margin-top: 2rem;
+    width: 4rem;
+    height: 4rem;
+    fill:var(--first-color);
+}
+
+.modal#gracias:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media screen and(min-width: 1024px){
+
+    .contact-form{
+        display: grid;
+        grid-template-columns: (2,1fr);
+        column-gap: 1rem;
+    }
+
+    .contact-form > textarea,
+    .contact-form > input{
+        font-size: 1rem;
+    }
+
+    .contact-form > textarea,
+    .contact-form-loader,
+    .contact-form > input[type="submit"]{
+        grid-column: span 2;
+    }
+
+}
+
+/***********HERO IMAGE*************/
+.home{
+    width: 100%;
+}
+.hero-image{
+    background-image: var(--image);
+    background-repeat: no-repeat;
+    background-size:  cover;
+    background-position: center;
+    background-attachment: var(--hero-attachment);
+    width: 100vw;
+}
+
+.hero-image-opacity{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--hero-opacity-color);
+    text-align: center;
+}
+
+.hero-image-title{
+    color:var(--hero-text-color);
+    font-size: 7.5vw;
+}
+
+/***********Menu**********/
+
+.btn-menu{
+    outline: thin solid var(--first-color);
+    border: 0;
+    background-color: var(--second-color);
+    cursor: pointer;
+}
+
+.btn-menu svg{
+    fill: var(--first-color);
+}
+
+
+header{
+    position: fixed;
+    bottom: 0px;
+}
+.menu{
+    
+    left: 0;
+    bottom: calc(1rem + var(--header-height));
+    position:fixed;
+    width: 100%;
+    background-color: var(--second-color);
+    display: flex;
+    flex-direction: column;
+    opacity:0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.menu.active{
+    opacity: 1;
+    pointer-events: auto
+}
+
+.menu a{
+    text-decoration: none;
+    color: var(--first-color);
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-style: bold;
+    text-align: center;
+}
+
+.menu a:hover{
+    color:white;
+    background-color: var(--first-color);
+}
+
+@media screen and (min-width:1024px){
+    .btn-menu{
+        display: none;
+    }
+    .menu{
+        position: static;
+        width: auto;
+        opacity: 1;
+        pointer-events: auto;
+        flex-direction: row;
+    }
+    .menu a{
+        height: 100%;
+    }
+    .menu a:hover{
+        background-color: transparent;
+    }
+}
+
+/***********MODAL**************/
+
+.modal{
+    position: fixed;
+    z-index: 999;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.466);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
+}
+
+.modal-content{
+    position: relative;
+}
+
+.modal-close{
+    position:absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.modal-content svg{
+    width: 3rem;
+    height: 3rem;
+    fill: var(--first-color);
+}
+
+/*selector que toma el inicio de id trabajo y la clase modal, ademas este permite la aparicion del modal cuando se hace click en el #*/
+.modal[id|="trabajo"]:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*************PROGRESS************/
+
+progress{
+    width: 100%;
+    height: 1rem;
+    background-color: var(--text-color);
+}
+/*pseudoclases para chrome el bar aplica a firefox*/
+progress::-webkit-progress-bar{
+    background-color: gray;
+}
+
+progress::-webkit-progress-value{
+    background-color: var(--text-color);
+}
+/*pseudoclase para bar*/
+
+progress::-moz-progress-value{
+    background-color: var(--text-color);
+}
+
+.progress{
+    margin: 1rem auto;
+}
+
+.progress>p{
+    margin:0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem;
+}
+
+
+
+
+/***************Utilities************/
+
+.avatar{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+    .bg-gray-light{
+        background-color: var(--gray);
+    }
+
+    .box-shadow-1{
+        box-shadow: 0.25rem 0.25rem 1rem rgba(0,0,0,0.25);
+    }
+
+    .btn{
+        border-radius: 0.5rem;
+        padding: 1rem;
+        display: inline-block;
+        width: 200px;
+        text-decoration: none;
+        text-align: center;
+        color: var(--link-color);
+        background-color: var(--first-color);
+    }
+
+    .container{
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--max-width);
+        overflow-x: hidden;
+    }
+
+    .gray-scale{
+        filter: grayscale(1);
+    }
+
+    .no-list{
+        list-style-type: none;
+    }
+
+    .none{
+        display: none;
+    }
+    
+    .section{
+        overflow-x: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .section-title{
+        border-top: thin solid var(--first-color);
+        border-bottom: thin solid var(--first-color);
+        margin:2rem auto;
+        padding: 0.5rem 1rem;
+        width: 250px;
+        text-align: center;
+        color: var(--title-color);
+    }
+
+    .text-first-color{
+        color: var(--first-color);
+    }
+
+    .text-center{
+        text-align: center;
+    }
+    
+    .text-left{
+        text-align: left;
+    }
+
+    .text-right{
+        text-align: right;
+    }
+
+    @media screen and (min-width:1024px){
+
+        .full-lg-screen{
+            max-height: 100vh;
+        }
+
+        .menu.container{
+            margin: 2rem;
+        }
+
+        .text-lg-center{
+            text-align: center;
+        }
+
+        .text-lg-left{
+            text-align: left;
+            
+        }
+    
+        .text-lg-right{
+            text-align: right;
+        }
+    
+    }
+    
+
+/***************Site Styles***************/
+
+    .about > article{
+        margin-bottom: 2rem;
+    }
+
+    /*seccion de contacto*/
+
+    .contact-card{
+        margin: 1rem auto;
+        padding: 1rem;
+        width: 80%;
+        height: 144px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .contact-card > svg{
+        width: 2rem;
+        height: 2rem;
+        fill: var(--first-color);
+    }
+
+    .contact-card > small{
+        margin-top: -1rem;
+    }
+
+    .contact-card > small > a{
+        text-decoration: none;
+        color: var(--first-color);
+    }
+
+    .footer{
+        padding: 0.5rem;
+        text-align: center;
+        color:white;
+        background-color: var(--third-color);
+    }
+
+    /*cabecera*/
+    .header{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 9;
+        width: 100vw;
+        height: var(--header-height);
+        background-color: var(--second-color);
+        padding: 1rem 0;
+        padding-bottom: 0;
+    }
+
+    .header > .container-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width:95vw;
+    } 
+
+    .logo a{
+        color: var(--first-color);
+        font-weight: bold;
+        font-size: 1.6rem;
+        text-decoration: none;
+        margin-left: 1rem;
+    }
+    
+    /*******Estilos de la seccion de portafolio*****/
+    .center-port{
+        display: block;
+        align-self: center;
+    }
+    
+    .portfolio >.container{
+            padding: 0 1rem;
+    }
+    
+    .card{
+        position:relative; 
+        width: 100%;  
+        height: 360px;
+        position:relative; 
+        margin:0; 
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .img{
+        width: 100%; 
+        height: 100%;
+    }
+    
+    .a{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+    }
+    .marco{
+        width: calc(100%-1rem);
+        height: calc(100% - 2rem);
+        position:absolute;  
+        top:0; left:0;   
+        background-color:var(--first-color-opacity); 
+        padding:1rem;
+        display:flex;
+        opacity: 0;
+        pointer-events: 0;
+        transition: opacity 0.5s ease-in-out ;
+    }
+    
+    .marco:hover{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .borde{
+        border: thin solid white;
+        justify-content:center; 
+        align-items:center;
+        overflow-y: hidden;
+    }
+    
+    .t{
+        padding: 1rem; 
+        padding-bottom: 0;
+        text-align:center;
+    }
+    
+    .p{
+        padding: 1rem; 
+        margin:0;
+    }
+
+    /*****Estilos de la seccion de servicio*****/
+    .service-card{
+        margin: 1rem 0;
+        padding:  1rem;
+        text-align: center;
+    }
+
+    .service-card svg{
+        fill: var(--first-color);
+        margin-bottom: 1.25rem;
+    }
+
+    .service-card h3{
+        color: var(--title-color);
+    }
+    
+    /*social media*/
+    .social-media > a{
+        padding: 0 0.4rem;
+        text-decoration: none;
+    }
+
+    .social-media > a > svg{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    /**********modal portafolio***********/
+
+    .portfolio-modal{
+        padding: 1rem;
+        max-width: 400px;
+        height: 90vh;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+    }
+
+    .portfolio-info{
+        margin-left: 1rem;
+        align-self: center;
+    }
+
+    .portfolio-info > h3{
+        margin: 1rem auto;
+        padding: 0.5rem 0;
+        border-bottom: medium solid var(--first-color);
+        color: var(--title-color);
+    }
+
+    .portfolio-details{
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-auto-rows: 2rem;
+    }
+
+    .portfolio-details > small > b {
+        font-style: bold;
+        color:var(--first-color);
+    }
+/**************Media querys****************/
+
+
+@media screen and (min-width:768px){
+
+    .contact-cards{
+        display: grid;
+        grid-template-columns: repeat(2, 48%);
+        justify-content: space-between;
+    }
+
+    .services > .container{
+        display: grid;
+        grid-template-columns: repeat(2, 45%);
+        justify-content: space-between;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .services .section-title{
+        grid-column: span 2;
+    }
+
+    .section-port{
+        display: grid;
+        grid-template-columns: repeat( 2, 50%);
+    }
+
+    .portfolio .section-title{
+        grid-column: span 2;
+    }
+
+    .portfolio-modal{
+        flex-direction: row;
+        max-width: 800px;
+        height: 400px;
+        overflow-y: none;
+    }
+
+    .slide > blockquote {
+        margin:0 auto;
+        padding: 0 8rem;
+    }
+
+}
+
+@media screen and (min-width:1024px){
+
+    .about{
+        display: grid;
+        grid-template-columns: repeat(3, 30%);
+        justify-content: space-between;
+        align-content: center;
+        margin: 2rem;
+        margin-top: 5rem;
+        height: 100vh;
+    }
+
+    .contact-cards{
+        grid-template-columns: repeat(4, 24%);
+    }
+
+    .header{
+        position: sticky;
+        top:0;
+        padding: 0;
+        height: calc(var(--header-height)- 0.5rem); 
+    }
+
+    .logo {
+        padding-right: 1rem;
+    }
+    
+    .section-port{
+        display: grid;
+        grid-template-columns: repeat( 3, 1fr);
+    }
+    
+    .portfolio{
+        padding: 2rem 0;
+    }
+
+    .portfolio > .container{
+        padding: 1rem 0;
+        width: 95%;
+    }
+    .portfolio .section-title{
+        grid-column: span 3;
+    }
+
+    .portfolio-modal{
+        flex-direction: row;
+        max-width: 800px;
+        height: 400px;
+        overflow-y: none;
+    }
+    /*ya no se necesita definir justify, grid, ni aling*/
+    
+    .services > .container{
+        grid-template-columns: repeat(3,30%);
+        justify-content: space-between;
+        height: 100vh;
+    }
+
+    .services .section-title{
+        grid-column: span 3;
+    }
+
+    .slide > blockquote {
+        margin:0 auto;
+        padding: 0 8rem;
+    }
+    
+}
+
